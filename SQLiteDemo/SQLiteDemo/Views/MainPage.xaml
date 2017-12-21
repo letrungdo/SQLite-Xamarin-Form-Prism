@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQLiteDemo.Views.MainPage"
+             xmlns:behavior="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="{Binding Title}">
+
+    <StackLayout VerticalOptions="StartAndExpand">
+        <Label Text="Name" />
+        <Entry Text="{Binding EName}" />
+        
+        <Label Text="Notes" />
+        <Entry Text="{Binding ENotes}" />
+       
+        
+        <Button Text="Save" Command="{Binding OnSaveClicked}" />
+        <Button Text="Delete" Command="{Binding OnDeleteClicked}" />
+
+        <ListView ItemsSource="{Binding LvSource}" >
+            
+                <ListView.Behaviors>
+                    <behavior:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    Command="{Binding ItemTappedCommand}"
+                    EventArgsParameterPath="Item"/>
+                </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout BackgroundColor="#eee" Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+
+                                <Label Text="{Binding ID}"/>
+                                <Label Text="{Binding Name}" TextColor="#f35e20" />
+                                <Label Text="{Binding Notes}" HorizontalOptions="EndAndExpand" TextColor="#503026" />
+                                
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+
+
+
+    </StackLayout>
+
+</ContentPage>
